@@ -4,18 +4,58 @@ import { Test } from '../components/Test';
 import Tasks from '../components/Tasks';
 import AddTasks from '../components/AddTasks';
 import {SingleTask} from "../components/SingleTask"
-
+import Login from '../components/LoginPage';
+import PrivateComponent from "../components/PrivateComponent";
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
      
       <Routes>
-        <Route path="/" element={<HomePage  />} />
-        <Route path="/tasks" element={<Tasks/>}/>
-        <Route path="/add-task" element={<AddTasks/>}/>
-         <Route path="/task/:id" element={<SingleTask/>}/>
+        {/* Public Route */}
+        <Route path="/login" element={<Login />} />
 
+        {/* Protected Routes */}
+        <Route
+          path="/"
+          element={
+            (
+              <PrivateComponent>
+                <HomePage />
+              </PrivateComponent>
+            )
+          }
+        />
+        <Route
+          path="/tasks"
+          element={
+            (
+              <PrivateComponent>
+                <Tasks />
+              </PrivateComponent>
+            )
+          }
+        />
+        <Route
+          path="/add-task"
+          element={
+            (
+              <PrivateComponent>
+                <AddTasks />
+              </PrivateComponent>
+            )
+          }
+        />
+        <Route
+          path="/task/:id"
+          element={
+            (
+              <PrivateComponent>
+                <SingleTask />
+              </PrivateComponent>
+            )
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
