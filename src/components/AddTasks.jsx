@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { TaskContext } from "../contexts/TaskContext";
 import { useNavigate } from "react-router";
+import { addTask } from "../service/taskService";
 
 export default function AddTasks() {
   const { tasks, setTasks } = useContext(TaskContext);
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
-//   console.log(tasks, "tasks");
+  //   console.log(tasks, "tasks");
   return (
     <div className="flex justify-center items-center h-full w-full ">
       <form
@@ -21,20 +22,26 @@ export default function AddTasks() {
           const status = data.get("status");
           console.log(task, desc, priority, status);
 
-          setTasks((prev) => {
+          addTask({
+            title: task,
+            description: desc,
+            status,
+            priority,
+          });
 
-            
-              return [
-                ...prev,
-                {
-                  id: prev.length + 1,
-                  title: task,
-                  description: desc,
-                  status,
-                  priority,
-                },
-              ];
-            });
+          // setTasks((prev) => {
+
+          //     return [
+          //       ...prev,
+          //       {
+          //         id: prev.length + 1,
+          //         title: task,
+          //         description: desc,
+          //         status,
+          //         priority,
+          //       },
+          //     ];
+          //   });
 
           navigate("/tasks")
         }}
@@ -58,9 +65,11 @@ export default function AddTasks() {
           <option value={"pending"}>Pending</option>
           <option value={"completed"}>Completed</option>
         </select>
-        <button type="submit" className="bg-blue-700 text-white" onClick={()=>{
-          
-        }}>
+        <button
+          type="submit"
+          className="bg-blue-700 text-white"
+          onClick={() => {}}
+        >
           Add Task
         </button>
       </form>
