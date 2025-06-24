@@ -12,6 +12,6 @@ export default function PrivateComponent({ children }) {
   }
   if (!user) {
     return <Navigate to="/login" replace />; // ✅ fix
-  }
+  } 
   return <div>{children}</div>;
 }
